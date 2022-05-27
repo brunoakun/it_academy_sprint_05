@@ -8,19 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// Parámetros
+// Config
 const CHISTES = [];
 let fecha = new Date();
 const openweathermapApiKey = "4d8fb5b93d4af21d66a2948710284366";
 const ciudadMeteo = "barcelona";
-// Config fetch Promesa
-const FETCH_URL = 'https://icanhazdadjoke.com';
-const FETCH_PARAMETROS = {
+// Config Api's chistes
+const FETCH_URL_tipo1 = 'https://icanhazdadjoke.com';
+const FETCH_PARAMETROS_tipo1 = {
     method: "GET",
     headers: {
         "Accept": "application/json"
     }
 };
+const FETCH_URL_tipo2 = 'http://api.icndb.com/jokes/random';
+const FETCH_PARAMETROS_tipo2 = {};
 // Dom Div's
 const cardBody = document.querySelector('#cardBody');
 const spanHeader = document.querySelector('#spanHeader');
@@ -34,20 +36,29 @@ let btnMalo = document.querySelector('#btnMalo');
 let btnNormal = document.querySelector('#btnNormal');
 let btnBueno = document.querySelector('#btnBueno');
 // Eventos
-btnMalo.addEventListener("click", () => getChiste(1));
-btnNormal.addEventListener("click", () => getChiste(2));
-btnBueno.addEventListener("click", () => getChiste(3));
+btnMalo.addEventListener("click", () => getChiste(1, getRandom()));
+btnNormal.addEventListener("click", () => getChiste(2, getRandom()));
+btnBueno.addEventListener("click", () => getChiste(3, getRandom()));
 btnEmpezar.addEventListener("click", () => {
     btnEmpezar.setAttribute("hidden", true);
-    getChiste(0);
+    getChiste(0, getRandom());
 });
-// Promesa Chiste
-function getChiste(voto) {
+// Promesa Chiste 
+function getChiste(voto, tipo) {
     return __awaiter(this, void 0, void 0, function* () {
         spanHeader.innerHTML = ` cargando... `;
-        yield fetch(FETCH_URL, FETCH_PARAMETROS)
+        // tipo = 1  icanhazdadjoke / tipo = 2 Chuck Norris
+        let url = FETCH_URL_tipo1;
+        let parametrosUrl = FETCH_PARAMETROS_tipo1;
+        if (tipo == 2) {
+            url = FETCH_URL_tipo2;
+            let parametrosUrl = FETCH_PARAMETROS_tipo2;
+        }
+        yield fetch(url, parametrosUrl)
             .then((response) => response.json())
             .then((chisteResult) => {
+            if (tipo == 2)
+                chisteResult = chisteResult.value;
             cardBody.innerHTML = chisteResult.joke;
             spanHeader.innerHTML = ` (${chisteResult.id}) `;
             fecha = new Date();
@@ -74,8 +85,14 @@ fetch(url)
     divCiudad.innerHTML = `<img class="city-icon" src="${icon}" alt="${weather[0]["description"]}"> ${name} ${Math.round(main.temp)}<sup>°C</sup> `;
     divMeteo.innerHTML = `${weather[0]["description"]}`;
 })
-    .catch(() => {
+    .catch((error) => {
+    alert(`error API meteo: ${error}`);
+    console.error(error);
 });
+// Devuleve random (1 ó 2)
+function getRandom() {
+    return Math.floor(Math.random() * 2) + 1;
+}
 // Muestra el array de chistes
 function muestraArrChistes() {
     let result = '';
