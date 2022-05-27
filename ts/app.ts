@@ -74,7 +74,7 @@ async function getChiste(voto: number, tipo: number): Promise<void> {
         .catch(error => console.error(error));
 
     console.log(CHISTES);
-    muestraArrChistes();
+    //muestraArrChistes();
 }
 
 

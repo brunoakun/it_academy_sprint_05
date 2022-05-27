@@ -72,7 +72,7 @@ function getChiste(voto, tipo) {
         })
             .catch(error => console.error(error));
         console.log(CHISTES);
-        muestraArrChistes();
+        //muestraArrChistes();
     });
 }
 // Promesa Meteo
