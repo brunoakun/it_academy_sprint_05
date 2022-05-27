@@ -1,7 +1,10 @@
 // Custom variables
 $primary: #d6dbf5;
-$secondary: #f0b8b8;
- 
+$secondary: #96cd87;
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
- 
+
+#divBtnScore .btn{
+    font-size: 12px;
+    text-transform: uppercase;
+}
