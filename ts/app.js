@@ -84,6 +84,7 @@ fetch(url)
     const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]["icon"]}.svg`;
     divCiudad.innerHTML = `<img class="city-icon" src="${icon}" alt="${weather[0]["description"]}"> ${name} ${Math.round(main.temp)}<sup>°C</sup> `;
     divMeteo.innerHTML = `${weather[0]["description"]}`;
+    meteoImagen(`${weather[0]["main"]}`);
 })
     .catch((error) => {
     alert(`error API meteo: ${error}`);
@@ -92,6 +93,26 @@ fetch(url)
 // Devuleve random (1 ó 2)
 function getRandom() {
     return Math.floor(Math.random() * 2) + 1;
+}
+// Imágen de fondo según méteo
+function meteoImagen(meteo) {
+    const headerMeteo = document.querySelector('#headerMeteo');
+    switch (meteo) {
+        case 'Clear':
+            headerMeteo.style.backgroundImage = "url('img/clear_sky.jpg')";
+            break;
+        case 'Clouds':
+            headerMeteo.style.backgroundImage = "url('img/cloudy_sky.jpg')";
+            break;
+        case 'Rain':
+            headerMeteo.style.backgroundImage = "url('img/rain_sky.jpg')";
+            break;
+        case 'Snow':
+            headerMeteo.style.backgroundImage = "url('img/snow_sky.jpg')";
+            break;
+        default:
+            headerMeteo.style.backgroundImage = "url('img/clear_sky.jpg')";
+    }
 }
 // Muestra el array de chistes
 function muestraArrChistes() {
