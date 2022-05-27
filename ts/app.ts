@@ -78,7 +78,7 @@ async function getChiste(voto: number, tipo: number): Promise<void> {
 }
 
 
-// Promesa Meteo
+// Promesa Meteo Inicio
 const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudadMeteo}&appid=${openweathermapApiKey}&units=metric`;
 
 fetch(url)
@@ -87,8 +87,7 @@ fetch(url)
         const { main, name, sys, weather } = data;
         const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]["icon"]}.svg`;
 
-        divCiudad.innerHTML = `<img class="city-icon" src="${icon}" alt="${weather[0]["description"]
-            }"> ${name} ${Math.round(main.temp)}<sup>°C</sup> `;
+        divCiudad.innerHTML = `<img class="city-icon" src="${icon}" alt="${weather[0]["description"]}"> ${name} ${Math.round(main.temp)}<sup>°C</sup> `;
         divMeteo.innerHTML = `${weather[0]["description"]}`;
 
         meteoImagen(`${weather[0]["main"]}`);

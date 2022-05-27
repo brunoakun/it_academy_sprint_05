@@ -75,7 +75,7 @@ function getChiste(voto, tipo) {
         //muestraArrChistes();
     });
 }
-// Promesa Meteo
+// Promesa Meteo Inicio
 const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudadMeteo}&appid=${openweathermapApiKey}&units=metric`;
 fetch(url)
     .then(response => response.json())

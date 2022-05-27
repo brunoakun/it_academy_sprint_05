@@ -2,8 +2,4 @@
 
 Consumir API's
 
-Bootstrap 5, 
-Sass, 
-Typescript 
-
-Clases
+Bootstrap 5, Sass, Typescript Clases
