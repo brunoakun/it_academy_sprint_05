@@ -10650,4 +10650,8 @@ fieldset:disabled .btn {
   font-size: 12px;
   text-transform: uppercase;
 }
+
+#cardBody {
+  min-height: 100px;
+}
 /*# sourceMappingURL=custom.css.map */
